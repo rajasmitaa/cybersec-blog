@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post Detail Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1876f2",
+                        "background-light": "#f0f2f5",
+                        "background-dark": "#18191a",
+                        "card-light": "#ffffff",
+                        "card-dark": "#242526",
+                        "text-primary-light": "#050505",
+                        "text-primary-dark": "#e4e6eb",
+                        "text-secondary-light": "#65676b",
+                        "text-secondary-dark": "#b0b3b8",
+                        "divider-light": "#ced0d4",
+                        "divider-dark": "#3e4042",
+                        "input-light": "#f0f2f5",
+                        "input-dark": "#3a3b3c"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-divider-light dark:border-divider-dark px-4 sm:px-6 lg:px-8 py-2 bg-card-light dark:bg-card-dark shadow-sm">
+<div class="flex items-center gap-2 sm:gap-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">hub</span>
+<h2 class="hidden sm:block text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em]">Connect</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full">
+<div class="text-text-secondary-light dark:text-text-secondary-dark flex bg-input-light dark:bg-input-dark items-center justify-center pl-4 rounded-l-full border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-text-primary-light dark:text-text-primary-dark focus:outline-0 focus:ring-0 border-none bg-input-light dark:bg-input-dark focus:border-none h-full placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark px-2 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search Connect" value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-center items-center gap-2 sm:gap-4 md:gap-8">
+<a class="text-text-primary-light dark:text-text-primary-dark flex flex-col items-center gap-1 border-b-2 border-primary pb-2 px-2 sm:px-4" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="hidden sm:block text-xs font-medium">Home</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark flex flex-col items-center gap-1 border-b-2 border-transparent pb-2 px-2 sm:px-4 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="hidden sm:block text-xs font-medium">Friends</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark flex flex-col items-center gap-1 border-b-2 border-transparent pb-2 px-2 sm:px-4 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">smart_display</span>
+<span class="hidden sm:block text-xs font-medium">Watch</span>
+</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark flex flex-col items-center gap-1 border-b-2 border-transparent pb-2 px-2 sm:px-4 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="hidden sm:block text-xs font-medium">Groups</span>
+</a>
+</div>
+<div class="flex items-center gap-2 sm:gap-4">
+<button class="flex cursor-pointer items-center justify-center rounded-full h-10 w-10 bg-input-light dark:bg-input-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center rounded-full h-10 w-10 bg-input-light dark:bg-input-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture, abstract purple and blue gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvdy3mwUt3hX4XHgjUFiD4SqJtVlI5CC5afW3QF18ha2XoFkgQExmfjhQLEOKjDE4C3z_LWYSGfQme8DMDXSLJx3fTbMCzrd8cfvdvsK8iMywG3vzlEHqPPJD9bY9qG2I5VHpO3MyHyP19iSW4GOWduxyxRqb-Kdhfvtn0Vq1QoyNhG22obLtZNQwy94Z6QzGexc6ycuodSZ0Spd4AU4w1XZp80QdfxqYifN-4UYHdsGUrc-LKvWamAM4I3R1OosyCkkrz0e_OFtkD");'></div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex flex-1 justify-center py-5 sm:py-8 px-4">
+<div class="flex flex-col max-w-[700px] w-full gap-4">
+<!-- Post Card -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm overflow-hidden">
+<div class="p-4 flex gap-3 items-start">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0" data-alt="Profile picture of Alexandria Lee" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCLTrsAtpo7o7zsbUjF20F67XXjdMcQtlcohlhqiJsaBLXwsk2_3QObjPMZPtkfnIRTlI8JqGgEdGCENESJRn2Kr6uUcUMB1doD5eXmFRNcRht3hqtVHvg1rawBNBOIEZCpjj4s5Rw3hfCLI92F_jknjPE4JHNZQbBxF8yPnSZ_C9MWR3kXxltIXFi9tEg43qfaQNtqyh834ULYjHnIgkiwnIkBoDCxPvchUSZ2LbZogDGVcsN4S0TZISA-0YOMTZ9AN75Po2Xgkfue");'></div>
+<div class="flex flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-bold">Alexandria Lee</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-xs">2 hours ago</p>
+</div>
+</div>
+<div class="px-4 pb-4">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-normal leading-normal">
+                            Enjoying a beautiful sunset at the beach! It's been an amazing day filled with sun, sand, and good company. Can't wait for more moments like this. #sunset #beachlife #goodvibes
+                        </p>
+</div>
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover" data-alt="A beautiful sunset over the ocean at a beach" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABKyRmuEd7pKBLCJNYzSRHzuZ_U9kbd39MIDG37LjfQtKVxC_Ax1Hu-IU-U2X7wtRSqzeUxiNk71uUNhKQ0a2bvv45RjkmgjRF3j5lVuQHJeCzmyxoSdC7eEqZ5hgm59DC32twegQG2tQ2KPufEWIwtpG4TkgxFK3hMpka4VOqvFwUjlULqMpCLl0zobACVBG7dOIUiHJjX3riXQ0nmRFoGgMXL0_xbXldCYYqL_ogbRhYoH5lJ_rLN27gSlHZ_yhXmOsyA5F3k369");'></div>
+<!-- Reaction Bar -->
+<div class="flex items-center justify-between px-4 pt-3 pb-2 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<p>12k</p>
+</div>
+<div class="flex items-center gap-4">
+<p>2.1k Comments</p>
+<p>482 Shares</p>
+</div>
+</div>
+<div class="border-t border-divider-light dark:border-divider-dark mx-4"></div>
+<div class="flex justify-around gap-2 px-2 py-1">
+<button class="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-input-light dark:hover:bg-input-dark text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined">thumb_up</span>
+<p class="text-sm font-bold">Like</p>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-input-light dark:hover:bg-input-dark text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined">chat_bubble_outline</span>
+<p class="text-sm font-bold">Comment</p>
+</button>
+<button class="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg hover:bg-input-light dark:hover:bg-input-dark text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined">share</span>
+<p class="text-sm font-bold">Share</p>
+</button>
+</div>
+<div class="border-t border-divider-light dark:border-divider-dark"></div>
+<!-- Comment Composer -->
+<div class="flex items-start px-4 py-3 gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0" data-alt="User profile picture, abstract purple and blue gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCv889LwBAJMb3GZV-GNo4K4vZvbpKlXVLRk0JwXAd0xPmshVsvIU3jBjbKcvM_PQ1iKI6Wl6Z05odeCD0Xem2-rXS5_GCMEC3lomivOiyJ2JpFYiOR1PVDmbWsoJl5s1NnHL_u5j11K-Llk5Gg_ge0MPbjk7L54pWZ59QR0buBqE8GUI5IDAakJIQri3zUscbwFpYIoRgSkaRRHhBkBh5RB1n1bFFEfwXtTnxwWiK1fiJfvw5a5ks_weNyffihNgTJ65emBSfpg2Vh");'></div>
+<label class="flex flex-col min-w-40 h-auto flex-1">
+<div class="flex w-full flex-1 items-stretch rounded-full h-10">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-text-primary-light dark:text-text-primary-dark focus:outline-0 focus:ring-0 border-none bg-input-light dark:bg-input-dark focus:border-none h-full placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark px-4 text-sm font-normal leading-normal" placeholder="Write a comment..." value=""/>
+</div>
+</label>
+<button class="max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-white text-sm font-medium leading-normal hidden sm:flex">
+<span class="truncate">Post</span>
+</button>
+</div>
+<!-- Comments List -->
+<div class="flex flex-col gap-1 p-4 pt-0">
+<!-- Single Comment -->
+<div class="flex w-full flex-row items-start justify-start gap-3 py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0" data-alt="Profile picture of Marcus Aurelius" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2C_re5ajOcc_yU1keqaQ68DBnZNpTIYpnqz19KWumoi85g1ijOLlS0zVucQ58FP4F_yRW6aKD6oYH6ePH75scW0IQt1Bw7kY-6wDnbrhagBu5tryidp39AgfONqZ2qZPvg2P0jbDWp3_F2HVZPRpyt1JhTKlqfS7deKp8IAO-sPMjzfGMi1rD5sPhNEUv8YZ5GuEmiPOM1WfRgUQfYeu7Fj0x48IrspueE0RxjVanxQs1x3Wli1W_n1GFVzYSz7OG1mvXr0Cbslga");'></div>
+<div class="flex h-full flex-1 flex-col items-start justify-start">
+<div class="bg-input-light dark:bg-input-dark rounded-xl px-3 py-2">
+<div class="flex w-full flex-row items-center justify-start gap-x-2">
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-bold">Marcus Aurelius</p>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-normal leading-normal">What a breathtaking view! Looks like it was the perfect end to a perfect day. Thanks for sharing!</p>
+</div>
+<div class="flex w-full flex-row items-center justify-start gap-4 pt-1 px-3">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-normal">1h ago</p>
+<button class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-bold hover:underline">Like</button>
+<button class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-bold hover:underline">Reply</button>
+</div>
+</div>
+</div>
+<!-- Single Comment -->
+<div class="flex w-full flex-row items-start justify-start gap-3 py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0" data-alt="Profile picture of Jane Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjAr-fML6nfgDNkVGX8LPZ0YklhbOTWSxKewwV30U1FYy-JaaMGAZGiSX-8bj5n9YzHQMW5brcQHYYeM1n56NHdUWVGKqfUkfANztZS_lGVQsDoGah-m4K1bsn2CCPOLo1CFa63l-dgdf6XOYCGLlZSLlWhTIqY4iUhuy6Qio5Z4ZlWeTQ-Br2CKVnosJJXCgq8raNOIuAaMGVzQA8qTYbVrusomjO27Z4MsjMoDagG1kHkW9U_7KHefxgUwPPunMJTRSjiiSvTB3r");'></div>
+<div class="flex h-full flex-1 flex-col items-start justify-start">
+<div class="bg-input-light dark:bg-input-dark rounded-xl px-3 py-2">
+<div class="flex w-full flex-row items-center justify-start gap-x-2">
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-bold">Jane Doe</p>
+</div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-normal leading-normal">This is stunning! Makes me want to book a vacation right now.</p>
+</div>
+<div class="flex w-full flex-row items-center justify-start gap-4 pt-1 px-3">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-normal">45m ago</p>
+<button class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-bold hover:underline">Like</button>
+<button class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-bold hover:underline">Reply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

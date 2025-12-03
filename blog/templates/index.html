@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Home Feed</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1876f2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="font-display">
+    <div class="relative flex min-h-screen w-full flex-col bg-background-light group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e2e7] bg-white px-6 py-3">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3 text-primary">
+                        <div class="size-8">
+                            <svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_6_319)">
+                                    <path
+                                        d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z">
+                                    </path>
+                                </g>
+                                <defs>
+                                    <clippath id="clip0_6_319">
+                                        <rect fill="white" height="48" width="48"></rect>
+                                    </clippath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h2 class="text-slate-900 text-xl font-bold leading-tight tracking-[-0.015em]">SocialApp</h2>
+                    </div>
+                    <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+                        <div class="flex w-full flex-1 items-stretch rounded-full h-full">
+                            <div
+                                class="text-[#60728a] flex border-none bg-[#f0f2f5] items-center justify-center pl-4 rounded-l-full border-r-0">
+                                <span class="material-symbols-outlined text-base">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-slate-900 focus:outline-0 focus:ring-0 border-none bg-[#f0f2f5] focus:border-none h-full placeholder:text-[#60728a] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                                placeholder="Search" value="" />
+                        </div>
+                    </label>
+                </div>
+                <div class="flex flex-1 justify-end gap-2 md:gap-4">
+                    <div class="flex items-center gap-2">
+                        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary px-4 py-3"
+                            href="index.html">Home</a>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="create.html"
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] gap-2 hover:bg-primary/90 transition-colors">
+                            <span class="material-symbols-outlined text-lg">add</span>
+                            <span class="truncate hidden sm:block">Create Post</span>
+                        </a>
+
+                        <button
+                            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#e4e6eb] text-slate-900 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                            <span class="material-symbols-outlined text-slate-800">notifications</span>
+                        </button>
+                        <button
+                            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#e4e6eb] text-slate-900 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                            <span class="material-symbols-outlined text-slate-800">chat_bubble</span>
+                        </button>
+                    </div>
+                    <a href="login.html"
+                        class="flex items-center justify-center bg-slate-100 hover:bg-slate-200 rounded-full size-10 cursor-pointer transition">
+                        <span class="material-symbols-outlined text-red-600 text-2xl">
+                            logout
+                        </span>
+                    </a>
+                </div>
+            </header>
+            <main class="flex-1 w-full max-w-xl mx-auto py-8 px-4">
+                <div class="flex flex-col gap-6">
+                    <div class="flex flex-col gap-4 bg-white rounded-xl shadow-sm p-4">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0"
+                                data-alt="User profile picture for composing a post"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5_quFN6AD3Ap8Tnz-vBvIDwHJ2nRJg7EsyyCRjXoiWEzd4dEYXFWV-JQw2OGk3_ipGXSooNUa1ZRZ4IWzWnfsEQBB-e2Fpldi561QwAliAEIDtxrYefExaYV7X8rIDypqwFky0KV6SpOANNgketh_6UMx_EO4OeRPBdhDwtmEvSaaxjSSI5Qkxa2_Kj7lnkcz9rGUJRerrbj6fR0Et2prbZFe-vLMywPwaaFbzCchp7heMLw6H8F0O9w_4KoPP5FRa3wvvFIGUWFU");'>
+                            </div>
+                            <div class="flex-1">
+                                <textarea
+                                    class="form-input w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary/50 border border-transparent bg-[#f0f2f5] focus:bg-white h-10 placeholder:text-[#60728a] text-base font-normal leading-normal px-4 py-2"
+                                    placeholder="What's on your mind?"></textarea>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-around border-t border-slate-200 pt-3">
+                            <button
+                                class="flex items-center justify-center gap-2 text-slate-500 hover:bg-slate-100 rounded-lg py-2 px-4 transition-colors">
+                                <span class="material-symbols-outlined text-red-500">videocam</span>
+                                <span class="text-sm font-medium">Live video</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center gap-2 text-slate-500 hover:bg-slate-100 rounded-lg py-2 px-4 transition-colors">
+                                <span class="material-symbols-outlined text-green-500">photo_library</span>
+                                <span class="text-sm font-medium">Photo/video</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center gap-2 text-slate-500 hover:bg-slate-100 rounded-lg py-2 px-4 transition-colors">
+                                <span class="material-symbols-outlined text-yellow-500">sentiment_satisfied</span>
+                                <span class="text-sm font-medium">Feeling</span>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="details.html" class="block">
+                        <div
+                            class="flex flex-col bg-white rounded-xl shadow-sm cursor-pointer hover:bg-slate-50 transition">
+                            <div class="p-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0"
+                                        data-alt="Olivia Chen's profile picture"
+                                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlybp2AqExTxWUfW3osFEHirVEFeKpeGiLb5nS8br3p7YBtbrFSjvTMa55N_48d1Z9QkCVqzifW917HNdxq5Vpo9oX3DgpRRWTyciWann55pRjfrNNav7EI3Ag5WG2RQher-NQAqb02Hc4bYUJoDxzIRIWmQBmsl0d2Xi_x-W1OWf9Bs1Q8cg8QcWyIo4YDW8xeYdUzpdPprla41IXvKPy-5qvgawovcOvmKxzbzfZk5cb7YZWIKSDtrb745HLUfVtsI7-9mpe2aGD");'>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <p class="text-slate-900 text-base font-bold leading-tight tracking-[-0.015em]">
+                                            Olivia Chen</p>
+                                        <p class="text-slate-500 text-sm font-normal leading-normal">2 hours ago</p>
+                                    </div>
+                                </div>
+                                <p class="text-slate-700 text-base font-normal leading-normal mt-3">
+                                    Just got back from a beautiful hike in the mountains! The views were absolutely
+                                    breathtaking. #nature #hiking
+                                </p>
+                            </div>
+
+                            <div class="w-full bg-center bg-no-repeat aspect-video bg-cover"
+                                data-alt="A breathtaking mountain view from a hike"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBA0IBLVoGIy76fdZY_fFr0yG6VIsgO1LxyYqUSSt_WgxDlEX0AGxWoUsr6-JZEvdnWrYlMFwQn8LRdS5dKZHTsRZvBCCMUgOOiyS94BPIGHIyOFW47Swls6YLGEWXjsKpqoxOab4StT9-49Qof6j3dkafVdrwTMCfYf_-QSTXFageBK0hwoJxpB34Gw4AlGxfLSXPIcK-r82sCp67gSsu8M3GqbjTQMjc6-nRBlgGXpz7WvbvrRqGQE4AD2xhw7LNcIYfj4ZfpZUs");'>
+                            </div>
+
+                            <div
+                                class="flex flex-wrap gap-2 px-4 py-1 justify-between items-center border-b border-slate-200">
+                                <div class="flex items-center">
+                                    <span class="material-symbols-outlined text-primary text-lg"
+                                        style="font-variation-settings: 'FILL' 1">thumb_up</span>
+                                    <p class="text-slate-500 text-sm font-normal leading-normal ml-1">128</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <p class="text-slate-500 text-sm font-normal leading-normal">16 Comments</p>
+                                    <p class="text-slate-500 text-sm font-normal leading-normal">8 Shares</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-1 px-4 py-1">
+                                <button
+                                    class="flex flex-1 items-center justify-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined">thumb_up</span>
+                                    <p class="text-sm font-bold leading-normal">Like</p>
+                                </button>
+                                <button
+                                    class="flex flex-1 items-center justify-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined">chat_bubble_outline</span>
+                                    <p class="text-sm font-bold leading-normal">Comment</p>
+                                </button>
+                                <button
+                                    class="flex flex-1 items-center justify-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                    <span class="material-symbols-outlined">share</span>
+                                    <p class="text-sm font-bold leading-normal">Share</p>
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="flex flex-col bg-white rounded-xl shadow-sm">
+                        <div class="p-4">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0"
+                                    data-alt="Benjamin Carter's profile picture"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCSO--w3eORSq_xX8WUBku64AfTTfOIuAhttnvRgrHYFSmXwGLQ6N1m-RjSzRIJEwPo-kdsZD6rwzy-fDPRCUbymmdFqy0ib8djddHSRy26uHrEuDtTc3ZgHlsqkO7WiIKG9Efi4kOpRLaSJZsZZ8eqt5-yympwDLNU3yDFWKy9o_6td6gNTn91J3oRC1Xz7UObVe8PHcSP1Zv5rp7vU8_OmfWqYAHoHV4Ij1WwFoDXph7LL30NtuAC2m0ZJJ0DPF4DJpWdIlSa4q6N");'>
+                                </div>
+                                <div class="flex flex-col">
+                                    <p class="text-slate-900 text-base font-bold leading-tight tracking-[-0.015em]">
+                                        Benjamin Carter</p>
+                                    <p class="text-slate-500 text-sm font-normal leading-normal">8 hours ago</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-700 text-base font-normal leading-normal mt-3">Excited to announce that
+                                I've started a new position as a Product Designer at Innovate Inc.! Looking forward to
+                                the new challenges and opportunities ahead.</p>
+                        </div>
+                        <div
+                            class="flex flex-wrap gap-2 px-4 py-1 justify-between items-center border-b border-slate-200">
+                            <div class="flex items-center">
+                                <span class="material-symbols-outlined text-primary text-lg"
+                                    style="font-variation-settings: 'FILL' 1">thumb_up</span>
+                                <p class="text-slate-500 text-sm font-normal leading-normal ml-1">256</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <p class="text-slate-500 text-sm font-normal leading-normal">42 Comments</p>
+                                <p class="text-slate-500 text-sm font-normal leading-normal">15 Shares</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-1 px-4 py-1">
+                            <button
+                                class="flex flex-1 items-center justify-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                <span class="material-symbols-outlined">thumb_up</span>
+                                <p class="text-sm font-bold leading-normal">Like</p>
+                            </button>
+                            <button
+                                class="flex flex-1 items-center justify-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                <span class="material-symbols-outlined">chat_bubble_outline</span>
+                                <p class="text-sm font-bold leading-normal">Comment</p>
+                            </button>
+                            <button
+                                class="flex flex-1 items-center justify-center gap-2 px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                <span class="material-symbols-outlined">share</span>
+                                <p class="text-sm font-bold leading-normal">Share</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
