@@ -1,24 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Profile</title>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b6cee",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              "display": ["Be Vietnam Pro", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] dark:border-b-background-dark px-6 md:px-10 py-3 bg-white dark:bg-gray-800 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-gray-800 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path></svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">ConnectSphere</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-gray-500 dark:text-gray-400 flex bg-background-light dark:bg-background-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-800 dark:text-white focus:outline-0 focus:ring-0 border-none bg-background-light dark:bg-background-dark focus:border-none h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4 md:gap-8">
+<div class="hidden lg:flex items-center gap-8">
+<a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal" href="#">Home</a>
+<a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal" href="#">Friends</a>
+<a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal" href="#">Messages</a>
+<a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal" href="#">Notifications</a>
+</div>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-background-light dark:bg-background-dark text-gray-800 dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Alexandra Chen's profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAel79Mbi1o9MRXWE1BKB9xi4o3JjZ9VTDuuVDdzDJpWxJwmEg0qU4mC_paOSjKll54jWXEnqVq1tkzG4uLXEqcm94C6Fy3Zp79Fk4ibh58iRvxxVAXhm_r8It82mCatNGA7wC00sv4PhtiD7yPJbGvrwtqiSXcQQ2l3n0S_hHFD8gwV6MCkpoR07wXLo2e_aylHIAAB_0YvR81_KAuTGqI3xwb6yKmXWroe3_ySIcXx_6q78m-M91ZjAuA847RPufD9tWLvgeqUvEP");'></div>
+</div>
+</header>
+<main class="flex-1">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<!-- Profile Section Wrapper -->
+<div class="w-full max-w-[1000px] mx-auto">
+<!-- Header with Cover Image -->
+<div class="relative mb-[-80px]">
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden h-48 sm:h-64 md:h-80 rounded-b-xl" data-alt="A tranquil beach scene at sunset" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCtxJ58woQvM4Q4CubryixIwhpsX3HuMw--fsohXoti1md-NUlw4a18HzJ3w7Odr2YK6CDhM6Y4x9VK_7TB6E9cMjUMJwhNIvcbUD7alXlBC9E00-OyqgPqNJm5PWPwfgW1pD0BoBupRnArKomfptjp3zQ5LT6aHxoejxUnZEzE0QSHVDnWEqEk6yF6Rzk66Q7iAHR49Tt5xw2CCldi8rpV0DUYqiVitasVlgfjOPmY9hwDaJVwEqrodJytjhSEuoNO5H8SlRMguxQi");'></div>
+</div>
+<!-- Profile Header -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-200 dark:border-gray-700">
+<div class="flex flex-col items-center sm:flex-row sm:items-end gap-4 mt-16 sm:mt-0">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-40 border-4 border-white dark:border-gray-800 shrink-0" data-alt="Close-up portrait of Alexandra Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClIFCphRO3DtnPi0Xl-CfUJrQtmWBrZzX2ihT97KY4qaShRGsH8laSBrYkZznoXWbx4UNkQs57EGHb1--BCifhuJcGcmkipxR5TktI_uSmvsLc0Z5VhXmEnRxtDPeIMzb2MESD6HZxUi_zcVZ5585zbr9ZDCtLXskLVv7yC2wYfPbcwiNSXTgUKK0MJxJpIHaiNXhukOI_3x1TiXeR1QUczu7UsuVVPVRlGoFvtb8DsoZLS8EfkSS3DqX8UWMp4RJRk0YF4WnqoFtp");'></div>
+<div class="flex flex-col sm:flex-row justify-between w-full items-center sm:items-end gap-4 text-center sm:text-left">
+<div>
+<p class="text-gray-800 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">
+    {{ user.username }}
+</p>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal">
+    {{ user.email }}
+</p>
 
-<h1>{{ user.username }}'s Profile</h1>
-<p>Email: {{ user.email }}</p>
-
-<h2>Your Posts</h2>
-<ul>
-    {% for post in posts %}
-        <li>
-            <a href="/home/post/{{ post.id }}">{{ post.title }}</a>
-        </li>
-    {% empty %}
-        <li>No posts yet.</li>
-    {% endfor %}
+</div>
+<div class="flex w-full sm:w-auto gap-3">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 text-sm font-bold leading-normal tracking-[0.015em] flex-1 sm:flex-auto">
+<span class="truncate">Friends</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] flex-1 sm:flex-auto">
+<span class="truncate">Message</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tabs -->
+<div class="mt-4">
+<div class="flex border-t border-gray-200 dark:border-gray-700 px-0 sm:px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-[13px] pt-4" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Posts</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 pb-[13px] pt-4 hover:text-gray-800 dark:hover:text-white" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">About</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 pb-[13px] pt-4 hover:text-gray-800 dark:hover:text-white" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Friends</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 pb-[13px] pt-4 hover:text-gray-800 dark:hover:text-white" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Photos</p>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="mt-6 grid grid-cols-12 gap-6 max-w-[1000px] mx-auto">
+<!-- Left Column -->
+<div class="col-span-12 lg:col-span-5 space-y-6">
+<!-- About Card -->
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+<h3 class="text-lg font-bold text-gray-800 dark:text-white mb-3">About</h3>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400">work</span><span>Product Designer at ConnectSphere</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400">school</span><span>Studied at University of Design</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400">home</span><span>Lives in San Francisco, CA</span></li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400">favorite</span><span>Single</span></li>
 </ul>
+</div>
+<!-- Photos Card -->
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-lg font-bold text-gray-800 dark:text-white">Photos</h3>
+<a class="text-sm text-primary font-medium" href="#">See all</a>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="aspect-square bg-cover bg-center rounded-lg" data-alt="A photo of a mountain range" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9ezb4rxa_FHOcHHQ_mcyXc-5zTydXFdeVB-00v6q16Wf794DhMoE9Kp0RECeU8xK5NKQe2dEiBGSIwRRuvTsDQ5pvJuq_vU99qSq1p2deGXOdjV-INXGgxNCAgL5KjjkiFIFM6a6cSXYNVSY4CotoqBoCA61mquwg5CiywTldpnPzUjSeMdqtBgT7talsRIcjTsDjMBY98HFcjdWxj8OmdTGcw2kPoYfYMpVSFiR74DKFZKg29jWy9BHUf3lkN3LhkdE2hFF2LT97');"></div>
+<div class="aspect-square bg-cover bg-center rounded-lg" data-alt="A photo of a bustling city street" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBCYR-eiNj__Huq1WnZ7NXmLdT9FFjIAkdzgjcUhK3aMC-lBWePHaVaOgXELamBH1WKbvWInk3guHTBQ9yhRof3fGx7FS7XgGcK_hSHrnJI46XWUszSli2a0QnUtG7lSiFiLpeu3UzI6Ee0I_UfIuxinrFcLfiF3V8pIS-nlE7PykmMKzINjgU-9pbLJgLvif5b2Ik4Gcz8pKoTGZP6UoR6J6jC4geX-kBmzomM10KfEJi6emZ47c8FvRDt9L0Ho1XYAKqXhXVwa1ve');"></div>
+<div class="aspect-square bg-cover bg-center rounded-lg" data-alt="A close-up of a delicious pastry" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBupzqfIg6WqEOAbCoTzC5bA1HcS5CBE0f9GGGABbqT1YDN6_08oJ5wttTjyaHd8uicncxKfEhBJjm-AuazosAJdAwX6sdP37iAx8cRNBvQkjXBkbM1Ua-BtZ95Yg7HAKrHCPBYmgR_-Bzt7vUGAPTO6QO3U69DgW2kJOezjXMMbUKNZWPGo9nnREe-xcv_cGebwK-JPNDMx0oJguqetThO_j25Uoi4qgTIs6zXukG33OLymAb0XADpIKmALiAI10l43XdyaDpfjaq');"></div>
+<div class="aspect-square bg-cover bg-center rounded-lg" data-alt="A person hiking in the woods" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBP9tKlYstWAZjc_DlWyKI0p030t35UBDuzXn3wCjkY-bcml03DUg9A0gOOTNfgjZqV-6bYCSUoeaDglqOUnGFA7zb46Xu-Zho7-6vsh_Cq0366S3u5RzerdTgPa3Wp9f9xCwg7NtuHlYFuVJ_i8OwANxJmRpg3QAXmif5-cAwTnUs9nE9zeqvOTsZFd2UXsM3LT82i-b25IMyFdxkH4YE2Q8t0TZ8F0NUOnfdlZnhN92Jb76TEOy4jSvihaO163oeXIZRSkEu-zFXI');"></div>
+<div class="aspect-square bg-cover bg-center rounded-lg" data-alt="A serene lake view" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQVrLXQhvlmbi2NZMHZZMNMV24YKZN3gIFFxZ_7RzXM1ruVXhMobKRapzcswB6s341vLL3-r___6scjRvS-mqs4YzP6a4uVT6EEE7Ib4OJrQ1ZWc0WviCw1qTbB588fjUb_9o-ycKtNeCU4ESAxBzr7g8bp4kM2Ta57mxXoCnVzEd-KVik_COQoLwdEB2Ko24FOI7gDBITjYLax21I8FxToqGtr0AdV54BxcXqlD-xjJv9YAmCzFzOoCDbXzCYlThVDU2CB8-zNx9V');"></div>
+<div class="aspect-square bg-cover bg-center rounded-lg" data-alt="A modern architectural building" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdDURIr4R_RRGz-iiilA8A3Z84gHoufCqL_5qWzli6jkVMNC5aRA9ZiuSVD4Mb8VDNi_SgA-GGIhGs1Q0_ZAmjKwDlNJiT4vCvTHkBqhJjgUbSxzFWGymTvprrtoG79qOOROnpnAWn0ZWZIbWS2vUbKIDzXD9tzFW_iRCYLd61thWoVstQCVVUQ6rZ1lgiskSEEP1bdjNXtJKAoaZkcgaJBhywuVPnq-3fD-OOFHxkjThvMI22uIInrRwVZH4g9bfdAnPwy_3cOj0T');"></div>
+</div>
+</div>
+</div>
+<!-- Center Column (Posts Feed) -->
+<div class="col-span-12 lg:col-span-7 space-y-6">
+<!-- Composer -->
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 @container">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0" data-alt="Alexandra Chen's profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBV2BnKVXWiSzK-m4aMVTwMG8vpg3lf8ZLbPC9fJ8P6PXektIgAEcPKN0amcDJ0E_qdhaVTbdZPWh-uFwQsarZ-VV0hYnc1eTsKNrelErRm1-8RsOnm2QMxrDN6gTs5lj8d_t1QjmWRxcHmeJyAjl6s5nmBhNn2tbPshwqEmQry1in0R3xLBGDiKc74JU56YIOQXqzgxLy3KUeWa5h3Y-cJUMeCPIo-VEmixZ1bZt8OjjfKdC_ITuts--RWoYwv1YwIHm_yTOMGjgJv");'></div>
+<div class="flex-1">
+<textarea class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-800 dark:text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:border-primary h-24 placeholder:text-gray-500 dark:placeholder:text-gray-400 text-base font-normal leading-normal p-3" placeholder="What's on your mind, {{ user.username }}?"
+></textarea>
+<div class="flex items-center justify-between mt-3">
+<div class="flex items-center gap-1">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400">image</span>
+</button>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400">smart_display</span>
+</button>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400">sell</span>
+</button>
+</div>
+<button class="min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-white text-sm font-medium leading-normal">
+<span class="truncate">Post</span>
+</button>
+</div>
+</div>
+{% for post in posts %}
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+    
+    <!-- Post Header -->
+    <div class="flex items-center gap-3 mb-4">
+        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shrink-0"
+             style='background-image: url("https://i.pravatar.cc/300");'>
+        </div>
+        <div>
+            <p class="font-bold text-gray-800 dark:text-white">{{ user.username }}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">{{ post.created_at }}</p>
+        </div>
+    </div>
 
-</body>
-</html>
+    <!-- Post Title / Content -->
+    <p class="text-gray-700 dark:text-gray-300 mb-4">
+        {{ post.title }}
+    </p>
+
+    <!-- Optional Image if exists -->
+    {% if post.image %}
+    <div class="w-full aspect-video bg-cover bg-center rounded-lg mb-4"
+         style="background-image: url('{{ post.image.url }}');">
+    </div>
+    {% endif %}
+
+    <!-- View Post Link -->
+    <a href="/home/post/{{ post.id }}"
+       class="text-primary font-semibold underline">
+        View Post
+    </a>
+
+</div>
+{% empty %}
+<p class="text-gray-500 dark:text-gray-400">No posts yet.</p>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
