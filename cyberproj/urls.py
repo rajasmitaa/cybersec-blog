@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from blog import views as blog_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,4 +14,8 @@ urlpatterns = [
 
     # Blog app
     path('home/', include('blog.urls')),
+
+    # Signup page
+    path('accounts/signup/', blog_views.signup, name='signup'),
 ]
+

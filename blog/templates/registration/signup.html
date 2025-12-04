@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sign Up</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="font-display bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-md space-y-6 bg-white shadow-lg rounded-xl p-8">
+    <div class="text-center space-y-1">
+        <h1 class="text-2xl font-bold text-gray-900">Create a new account</h1>
+        <p class="text-sm text-gray-500">It's quick and easy.</p>
+    </div>
+
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Username</label>
+            <input
+                type="text"
+                name="username"
+                required
+                class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm"
+                placeholder="Choose a username"
+            />
+            {% if form.username.errors %}
+                <p class="text-sm text-red-600 mt-1">{{ form.username.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Password</label>
+            <input
+                type="password"
+                name="password1"
+                required
+                class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm"
+                placeholder="Create a password"
+            />
+            {% if form.password1.errors %}
+                <p class="text-sm text-red-600 mt-1">{{ form.password1.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium mb-1">Confirm Password</label>
+            <input
+                type="password"
+                name="password2"
+                required
+                class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm"
+                placeholder="Confirm your password"
+            />
+            {% if form.password2.errors %}
+                <p class="text-sm text-red-600 mt-1">{{ form.password2.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <!-- signup button -->
+        <button
+            type="submit"
+            class="w-full h-11 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition"
+        >
+            Sign Up
+        </button>
+    </form>
+
+    <p class="text-center text-sm text-gray-600">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-blue-600 font-medium hover:underline">
+            Log in
+        </a>
+    </p>
+</div>
+
+</body>
+</html>

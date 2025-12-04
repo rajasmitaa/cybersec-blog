@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .models import Post, Comment, Like
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
 
 @login_required
 def home(request):
@@ -91,3 +94,17 @@ def like_post(request, post_id):
         like.delete()
 
     return redirect("post_detail", post_id=post.id)
+
+# User signup view
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+    else:
+        form = UserCreationForm()
+
+    return render(request, "registration/signup.html", {"form": form})
+
