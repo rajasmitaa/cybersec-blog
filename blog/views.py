@@ -4,19 +4,21 @@ from django.views.decorators.http import require_POST
 from .models import Post, Comment, Like
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.db.models import Count
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 
 @login_required
 def home(request):
-    """
-    Show all posts + like/comment counts.
-    """
-    posts = Post.objects.all().order_by("-created_at")
-
-    # Inject counts for the template
-    for p in posts:
-        p.like_count = Like.objects.filter(post=p).count()
-        p.comment_count = Comment.objects.filter(post=p).count()
+    posts = (
+        Post.objects.all()
+        .annotate(
+            like_count=Count("likes", distinct=True),
+            comment_count=Count("comment", distinct=True),
+        )
+        .order_by("-created_at")
+    )
 
     return render(request, "home.html", {"posts": posts})
 
@@ -40,18 +42,16 @@ def create_post(request):
 
     return render(request, "blog/create_post.html")
 
+#post detail view
 @login_required
 def post_detail(request, post_id):
-    """
-    Show a single post, like count, comments, and whether user liked it.
-    """
     post = get_object_or_404(Post, id=post_id)
     comments = Comment.objects.filter(post=post).order_by("created_at")
-    like_count = Like.objects.filter(post=post).count()
 
+    like_count = post.likes.count()
     user_liked = False
     if request.user.is_authenticated:
-        user_liked = Like.objects.filter(post=post, user=request.user).exists()
+        user_liked = post.likes.filter(user=request.user).exists()
 
     context = {
         "post": post,
@@ -81,17 +81,23 @@ def add_comment(request, post_id):
     return redirect("post_detail", post_id=post.id)
 
 
+"""Like or unlike a post."""
+
 @login_required
 @require_POST
-def like_post(request, post_id):
-    """
-    Like/unlike toggle for posts.
-    """
-    post = get_object_or_404(Post, id=post_id)
-    like, created = Like.objects.get_or_create(post=post, user=request.user)
 
-    if not created:
-        like.delete()
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    # Check if user already liked
+    existing_like = Like.objects.filter(post=post, user=request.user)
+
+    if existing_like.exists():
+        # User already liked → unlike (delete)
+        existing_like.delete()
+    else:
+        # User has not liked yet → create like
+        Like.objects.create(post=post, user=request.user)
 
     return redirect("post_detail", post_id=post.id)
 
@@ -113,3 +119,7 @@ def profile(request):
     user = request.user
     posts = user.post_set.all()  # All posts created by this user
     return render(request, 'profile.html', {'user': user, 'posts': posts})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login') 

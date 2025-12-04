@@ -1,52 +1,123 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html class="light" lang="en">
+
 <head>
-    <title>{{ post.title }} | Post Detail</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+        rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1876f2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: { display: ["Plus Jakarta Sans"] }
+                },
+            },
+        }
+    </script>
 </head>
-<body class="bg-light">
 
-<div class="container mt-4">
-    <h3>{{ post.title }}</h3>
-    <p class="text-muted">
-        Posted by {{ post.author.username }} on {{ post.created_at }}
-    </p>
+<body class="bg-background-light font-display">
 
-    <p>{{ post.content }}</p>
+    <!-- NAVBAR -->
+    <header class="flex items-center justify-between bg-white px-6 py-4 shadow">
+        <h2 class="text-xl font-bold text-primary">Post Details</h2>
 
-    <!-- LIKE BUTTON -->
-    <form method="POST" action="{% url 'like_post' post.id %}" class="mb-3">
-        {% csrf_token %}
-        <button class="btn btn-sm btn-primary" type="submit">
-            {% if user_liked %}Unlike{% else %}Like{% endif %} ({{ like_count }})
-        </button>
-    </form>
+        <a href="{% url 'home' %}" class="text-sm font-semibold text-slate-700 hover:underline">
+            Back to Home
+        </a>
+    </header>
 
-    <hr>
-    <h5>Comments</h5>
+    <main class="flex justify-center py-10 px-4">
+        <div class="w-full max-w-xl bg-white rounded-xl shadow-lg p-6 space-y-6">
 
-    <!-- EXISTING COMMENTS -->
-    {% for comment in comments %}
-        <div class="card p-2 mb-2">
-            <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
-            <small class="text-muted">{{ comment.created_at }}</small>
+            <!-- POST HEADER -->
+            <div class="flex items-center gap-3">
+                <div class="size-12 rounded-full bg-center bg-cover"
+                     style="background-image:url('https://api.dicebear.com/9.x/identicon/svg?seed={{ post.author.username }}')"></div>
+
+                <div>
+                    <p class="text-lg font-semibold">{{ post.author.username }}</p>
+                    <p class="text-sm text-gray-500">{{ post.created_at }}</p>
+                </div>
+            </div>
+
+            <!-- TITLE -->
+            <h1 class="text-2xl font-bold">{{ post.title }}</h1>
+
+            <!-- CONTENT -->
+            <p class="text-gray-700 text-base leading-relaxed">
+                {{ post.content }}
+            </p>
+
+            <!-- LIKE BUTTON -->
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'like_post' post.id %}">
+                {% csrf_token %}
+                <button
+                    class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90">
+                    {% if user_liked %}
+                        <span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">👎</span>
+                        Unlike ({{ like_count }})
+                    {% else %}
+                        <span class="material-symbols-outlined">👍</span>
+                        Like ({{ like_count }})
+                    {% endif %}
+                </button>
+            </form>
+            {% endif %}
+
+            <hr>
+
+            <!-- COMMENTS SECTION -->
+            <h2 class="text-xl font-bold">Comments ({{ comments|length }})</h2>
+
+            <div class="space-y-4">
+                {% for comment in comments %}
+                <div class="bg-gray-100 rounded-lg p-4 space-y-1">
+                    <p class="text-sm font-semibold">{{ comment.user.username }}</p>
+                    <p class="text-gray-700">{{ comment.content }}</p>
+                    <p class="text-xs text-gray-500">{{ comment.created_at }}</p>
+                </div>
+                {% empty %}
+                <p class="text-gray-500">No comments yet.</p>
+                {% endfor %}
+            </div>
+
+            <!-- ADD COMMENT -->
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'add_comment' post.id %}" class="space-y-3 mt-4">
+                {% csrf_token %}
+                <textarea name="content"
+                          rows="3"
+                          required
+                          class="form-input w-full rounded-lg border-gray-300 px-4 py-2 text-sm resize-none"
+                          placeholder="Write a comment..."></textarea>
+
+                <button
+                    class="w-full bg-primary text-white h-11 rounded-lg font-semibold hover:bg-primary/90">
+                    Add Comment
+                </button>
+            </form>
+            {% else %}
+            <p class="text-gray-500 text-center mt-4">Login to comment.</p>
+            {% endif %}
         </div>
-    {% empty %}
-        <p class="text-muted">No comments yet.</p>
-    {% endfor %}
-
-    <!-- ADD COMMENT FORM -->
-    {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'add_comment' post.id %}" class="mt-3">
-            {% csrf_token %}
-            <textarea name="content" class="form-control mb-2" placeholder="Write a comment..." required></textarea>
-            <button class="btn btn-success">Add Comment</button>
-        </form>
-    {% else %}
-        <p class="text-muted mt-3">Login to comment.</p>
-    {% endif %}
-</div>
+    </main>
 
 </body>
+
 </html>
