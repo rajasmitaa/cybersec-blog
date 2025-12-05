@@ -8,10 +8,14 @@
           content="width=device-width, initial-scale=1.0">
     <title>{{ post.title }}</title>
 
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
         rel="stylesheet" />
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block" rel="stylesheet" />
 
     <script>
         tailwind.config = {
@@ -28,6 +32,12 @@
             },
         }
     </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
 </head>
 
 <body class="bg-background-light font-display">
@@ -37,7 +47,7 @@
         <h2 class="text-xl font-bold text-primary">Post Details</h2>
 
         <a href="{% url 'home' %}" class="text-sm font-semibold text-slate-700 hover:underline">
-            Back to Home
+            ← Back to Home
         </a>
     </header>
 
@@ -50,70 +60,104 @@
                      style="background-image:url('https://api.dicebear.com/9.x/identicon/svg?seed={{ post.author.username }}')"></div>
 
                 <div>
-                    <p class="text-lg font-semibold">{{ post.author.username }}</p>
+                    <p class="text-lg font-semibold text-slate-900">{{ post.author.username }}</p>
                     <p class="text-sm text-gray-500">{{ post.created_at }}</p>
                 </div>
             </div>
 
             <!-- TITLE -->
-            <h1 class="text-2xl font-bold">{{ post.title }}</h1>
+            <h1 class="text-2xl font-bold text-slate-900">{{ post.title }}</h1>
 
             <!-- CONTENT -->
             <p class="text-gray-700 text-base leading-relaxed">
                 {{ post.content }}
             </p>
 
-            <!-- LIKE BUTTON -->
-            {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'like_post' post.id %}">
-                {% csrf_token %}
-                <button
-                    class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90">
-                    {% if user_liked %}
-                        <span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">👎</span>
-                        Unlike ({{ like_count }})
-                    {% else %}
-                        <span class="material-symbols-outlined">👍</span>
-                        Like ({{ like_count }})
-                    {% endif %}
-                </button>
-            </form>
+            <!-- IMAGE (if uploaded) -->
+            {% if post.image %}
+            <div class="mt-3 overflow-hidden rounded-xl border border-slate-200">
+                <img src="{{ post.image.url }}"
+                     alt="Post image"
+                     class="w-full max-h-[500px] object-cover">
+            </div>
             {% endif %}
 
-            <hr>
+            <!-- LIKE BUTTON -->
+            <div class="pt-2">
+                {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'like_post' post.id %}">
+                    {% csrf_token %}
+                    <button
+                        class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition">
+                        {% if user_liked %}
+                            <span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">
+                                thumb_down
+                            </span>
+                            <span>Unlike ({{ like_count }})</span>
+                        {% else %}
+                            <span class="material-symbols-outlined">
+                                thumb_up
+                            </span>
+                            <span>Like ({{ like_count }})</span>
+                        {% endif %}
+                    </button>
+                </form>
+                {% else %}
+                <p class="text-sm text-slate-500">
+                    <a href="{% url 'login' %}" class="text-primary font-semibold hover:underline">Login</a> to like this post.
+                </p>
+                {% endif %}
+            </div>
+
+            <hr class="border-slate-200">
 
             <!-- COMMENTS SECTION -->
-            <h2 class="text-xl font-bold">Comments ({{ comments|length }})</h2>
+            <div class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900">
+                    Comments ({{ comments|length }})
+                </h2>
 
-            <div class="space-y-4">
-                {% for comment in comments %}
-                <div class="bg-gray-100 rounded-lg p-4 space-y-1">
-                    <p class="text-sm font-semibold">{{ comment.user.username }}</p>
-                    <p class="text-gray-700">{{ comment.content }}</p>
-                    <p class="text-xs text-gray-500">{{ comment.created_at }}</p>
+                <div class="space-y-4">
+                    {% for comment in comments %}
+                    <div class="bg-gray-100 rounded-lg p-4 space-y-1">
+                        <p class="text-sm font-semibold text-slate-900">
+                            {{ comment.user.username }}
+                        </p>
+                        <p class="text-gray-700 text-sm">
+                            {{ comment.content }}
+                        </p>
+                        <p class="text-xs text-gray-500">
+                            {{ comment.created_at }}
+                        </p>
+                    </div>
+                    {% empty %}
+                    <p class="text-gray-500 text-sm">No comments yet.</p>
+                    {% endfor %}
                 </div>
-                {% empty %}
-                <p class="text-gray-500">No comments yet.</p>
-                {% endfor %}
             </div>
 
             <!-- ADD COMMENT -->
             {% if user.is_authenticated %}
             <form method="POST" action="{% url 'add_comment' post.id %}" class="space-y-3 mt-4">
                 {% csrf_token %}
+                <label class="block text-sm font-semibold text-slate-800">
+                    Add a comment
+                </label>
                 <textarea name="content"
                           rows="3"
                           required
-                          class="form-input w-full rounded-lg border-gray-300 px-4 py-2 text-sm resize-none"
+                          class="form-textarea w-full rounded-lg border-gray-300 px-4 py-2 text-sm resize-none focus:border-primary focus:ring-primary"
                           placeholder="Write a comment..."></textarea>
 
                 <button
-                    class="w-full bg-primary text-white h-11 rounded-lg font-semibold hover:bg-primary/90">
-                    Add Comment
+                    class="w-full bg-primary text-white h-11 rounded-lg font-semibold text-sm hover:bg-primary/90 transition">
+                    Post Comment
                 </button>
             </form>
             {% else %}
-            <p class="text-gray-500 text-center mt-4">Login to comment.</p>
+            <p class="text-gray-500 text-center mt-4 text-sm">
+                <a href="{% url 'login' %}" class="text-primary font-semibold hover:underline">Login</a> to comment.
+            </p>
             {% endif %}
         </div>
     </main>

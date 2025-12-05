@@ -1,20 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en" class="light">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Post</title>
 
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
         rel="stylesheet" />
 
     <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
@@ -22,13 +21,23 @@
                         "background-light": "#f5f7f8",
                         "background-dark": "#101822",
                     },
-                    fontFamily: {
-                        display: ["Plus Jakarta Sans"],
+                    fontFamily: { display: ["Plus Jakarta Sans"] },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
                     },
                 },
             },
-        }
+        };
     </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
 </head>
 
 <body class="bg-background-light font-display">
@@ -37,43 +46,99 @@
     <header class="flex items-center justify-between bg-white px-6 py-3 shadow">
         <h2 class="text-xl font-bold text-primary">Create Post</h2>
 
-        <a href="{% url 'home' %}" class="text-sm font-semibold text-slate-700 hover:underline">
-            Back to Home
+        <a href="{% url 'home' %}"
+           class="text-sm font-semibold text-slate-700 hover:underline">
+            ← Back to Home
         </a>
     </header>
 
     <!-- MAIN FORM -->
     <main class="flex justify-center py-10 px-4">
-        <div class="w-full max-w-xl bg-white rounded-xl shadow-lg p-6">
+        <div class="w-full max-w-xl bg-white rounded-xl shadow-lg p-6 space-y-6">
 
-            <form method="POST" action="{% url 'create_post' %}" class="space-y-6">
+            <h1 class="text-2xl font-bold text-slate-900 mb-2">Share Something</h1>
+            <p class="text-sm text-slate-500">Write a cybersec story, a vuln breakdown, or just a thought.</p>
+
+            <!-- Non-field errors -->
+            {% if form.non_field_errors %}
+                <div class="mb-4 text-sm text-red-600 space-y-1">
+                    {% for err in form.non_field_errors %}
+                        <p>{{ err }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="POST"
+                  enctype="multipart/form-data"
+                  class="space-y-5">
+
                 {% csrf_token %}
 
                 <!-- Title -->
-                <div>
-                    <label class="block text-sm font-semibold mb-1">Title</label>
-                    <input name="title"
-                           required
-                           class="form-input w-full rounded-lg border-gray-300 h-12 px-4 text-sm"
-                           placeholder="Enter post title">
+                <div class="space-y-1">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Title
+                    </label>
+                    <input
+                        type="text"
+                        name="title"
+                        value="{{ form.title.value|default_if_none:'' }}"
+                        placeholder="eg. Breaking down SQL Injection in login forms"
+                        class="form-input flex w-full rounded-lg border-gray-300 bg-white h-11 px-4 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-primary" />
+                    {% if form.title.errors %}
+                        <p class="text-xs text-red-600 mt-1">
+                            {{ form.title.errors.0 }}
+                        </p>
+                    {% endif %}
                 </div>
 
                 <!-- Content -->
-                <div>
-                    <label class="block text-sm font-semibold mb-1">Content</label>
-                    <textarea name="content"
-                              rows="5"
-                              required
-                              class="form-input w-full rounded-lg border-gray-300 px-4 py-3 text-sm resize-none"
-                              placeholder="Write something..."></textarea>
+                <div class="space-y-1">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Content
+                    </label>
+                    <textarea
+                        name="content"
+                        rows="5"
+                        placeholder="Write your detailed explanation, PoC, steps, or notes here..."
+                        class="form-textarea flex w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary focus:ring-primary resize-y">{{ form.content.value|default_if_none:'' }}</textarea>
+                    {% if form.content.errors %}
+                        <p class="text-xs text-red-600 mt-1">
+                            {{ form.content.errors.0 }}
+                        </p>
+                    {% endif %}
+                </div>
+
+                <!-- Image Upload -->
+                <div class="space-y-1">
+                    <label class="block text-sm font-semibold text-slate-800">
+                        Upload Image (optional)
+                    </label>
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        class="block w-full rounded-lg border border-dashed border-gray-300 bg-gray-50 px-4 py-2 text-sm text-gray-700 file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-primary/90" />
+                    {% if form.image.errors %}
+                        <p class="text-xs text-red-600 mt-1">
+                            {{ form.image.errors.0 }}
+                        </p>
+                    {% endif %}
+                    <p class="text-xs text-slate-500">
+                        Optional: attach screenshots, diagrams, or PoC images.
+                    </p>
                 </div>
 
                 <!-- Submit -->
-                <button class="w-full h-12 bg-primary rounded-lg text-white font-semibold hover:bg-primary/90">
-                    Publish
+                <button
+                    class="w-full h-11 bg-primary rounded-lg text-white font-bold text-sm hover:bg-primary/90 transition flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-base">
+                       
+                    </span>
+                    <span>Publish Post</span>
                 </button>
-            </form>
 
+            </form>
         </div>
     </main>
 

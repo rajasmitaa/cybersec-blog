@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.db.models import Count
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-
+from .forms import PostForm
 
 @login_required
 def home(request):
@@ -25,22 +25,17 @@ def home(request):
 
 @login_required
 def create_post(request):
-    """
-    Create a post and jump straight to its detail page.
-    """
     if request.method == "POST":
-        title = request.POST.get("title")
-        content = request.POST.get("content")
+        form = PostForm(request.POST, request.FILES)  # 👈 include request.FILES
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('home')
+    else:
+        form = PostForm()
 
-        if title and content:
-            post = Post.objects.create(
-                author=request.user,
-                title=title,
-                content=content,
-            )
-            return redirect("post_detail", post_id=post.id)
-
-    return render(request, "blog/create_post.html")
+    return render(request, "blog/create_post.html", {"form": form})
 
 #post detail view
 @login_required
