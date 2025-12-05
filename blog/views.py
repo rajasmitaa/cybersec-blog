@@ -111,9 +111,8 @@ def signup(request):
 
 @login_required
 def profile(request):
-    user = request.user
-    posts = user.post_set.all()  # All posts created by this user
-    return render(request, 'profile.html', {'user': user, 'posts': posts})
+    posts = Post.objects.filter(author=request.user).order_by("-created_at")
+    return render(request, "profile.html", {"posts": posts})
 
 def logout_view(request):
     logout(request)
