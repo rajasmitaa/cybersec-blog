@@ -26,7 +26,7 @@ def home(request):
 @login_required
 def create_post(request):
     if request.method == "POST":
-        form = PostForm(request.POST, request.FILES)  # 👈 include request.FILES
+        form = PostForm(request.POST, request.FILES)  #  include request.FILES
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -108,6 +108,8 @@ def signup(request):
         form = UserCreationForm()
 
     return render(request, "registration/signup.html", {"form": form})
+
+# User profile view
 
 @login_required
 def profile(request):
