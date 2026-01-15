@@ -1,13 +1,84 @@
-/* Font */
-.font-display {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Material Icons */
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+body {
+  margin: 0;
+  background: #f5f7f8;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #1f2937;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+input[type="text"],
+textarea {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  resize: none;
+}
+
+textarea {
+  min-height: 120px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1876f2;
+}
+
+.file-label {
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.file-label input {
+  display: block;
+  margin-top: 6px;
+}
+
+button {
+  margin-top: 10px;
+  background: #1876f2;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #125dc2;
 }

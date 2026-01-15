@@ -1,15 +1,23 @@
 .material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .material-symbols-outlined.filled {
-    font-variation-settings:
-        'FILL' 1,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* FORCE Create Post button visibility */
+.create-post-btn {
+  background-color: #1876f2; /* primary blue */
+  color: #ffffff;
+  border: none;
+}
+
+.create-post-btn:hover {
+  background-color: #1464d8;
+}
+
+/* Make sure icon inside is visible */
+.create-post-btn .material-symbols-outlined {
+  color: #ffffff;
 }

@@ -1,63 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" class="light">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Post Page</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Post</title>
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="{% static 'css/create_post.css' %}" />
+    <script src="{% static 'js/create_post.js' %}" defer></script>
+  </head>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <body>
+    <div class="page">
+      <div class="card">
+        <h1>Create Post</h1>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'blog/css/create_post.css' %}">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
 
-    <!-- Tailwind Config -->
-    <script src="{% static 'blog/js/tailwind.config.js' %}"></script>
-</head>
+          <input type="text" name="title" placeholder="Post title" required />
 
-<body class="font-display bg-background-light dark:bg-background-dark">
+          <textarea
+            name="content"
+            placeholder="What's on your mind?"
+            required
+          ></textarea>
 
-<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+          <label class="file-label">
+            Attach file (image / audio / anything)
+            <input type="file" name="image" />
+          </label>
 
-<header class="flex items-center justify-center whitespace-nowrap border-b border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-[#242526] px-10 py-3 fixed top-0 left-0 right-0 z-50 shadow-sm">
-    <div class="flex items-center w-full max-w-7xl">
-        <h2 class="text-xl font-bold text-primary">SocialApp</h2>
+          <button type="submit">Post</button>
+        </form>
+      </div>
     </div>
-</header>
-
-<main class="flex h-full grow flex-col pt-24 pb-10">
-    <div class="flex flex-1 justify-center px-4">
-        <div class="w-full max-w-2xl">
-
-            <div class="bg-white dark:bg-[#242526] rounded-lg shadow-md border border-slate-200/80 dark:border-slate-800/80">
-
-                <div class="relative flex items-center justify-center p-4 border-b border-slate-200 dark:border-slate-700">
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Create Post</h2>
-                </div>
-
-                <div class="p-4">
-                    <textarea class="form-input w-full min-h-[120px] resize-none border-none bg-transparent text-lg text-slate-800 dark:text-slate-100 placeholder:text-slate-500 focus:ring-0 focus:outline-none"
-                              placeholder="What's on your mind?"></textarea>
-                </div>
-
-                <div class="px-4 pb-4">
-                    <button class="w-full h-10 rounded-lg bg-primary text-white text-base font-bold hover:opacity-90">
-                        Post
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</main>
-
-</div>
-
-</body>
+  </body>
 </html>
