@@ -38,3 +38,14 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.user.username} → {self.post.title}"
+    
+
+#security model
+
+class SecurityQuestion(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # ADDED
+    question = models.CharField(max_length=255)  # ADDED
+    answer = models.CharField(max_length=255)  # ADDED (store hashed later if you want)
+
+    def __str__(self):
+        return self.user.username

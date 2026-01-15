@@ -1,8 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" class="light">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
@@ -11,120 +10,133 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
-          rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-          rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
 
     <!-- Tailwind Config -->
     <script src="{% static 'js/tailwind_config.js' %}"></script>
-</head>
+  </head>
 
-<body class="font-display">
-<div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
-  <div class="layout-container flex h-full grow flex-col">
-
-    <!-- HEADER -->
-    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 px-6 sm:px-10 md:px-20 py-3">
-      <a href="{% url 'home' %}" class="flex items-center gap-4 text-gray-900 dark:text-white">
-        <div class="size-6 text-primary">
-          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
-                  fill="currentColor"></path>
-          </svg>
-        </div>
-        <h2 class="text-xl font-bold tracking-[-0.015em]">
-          VulneraBlog — Write. React. Connect.
-        </h2>
-      </a>
-    </header>
-
-    <!-- MAIN -->
-    <main class="flex flex-1 items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
-      <div class="w-full max-w-md space-y-8">
-
-        <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/50 shadow-lg p-8 space-y-6">
-          <div class="text-center">
-            <h1 class="text-gray-900 dark:text-white text-3xl font-bold tracking-tight">
-              Log In to VulneraBlog
-            </h1>
-          </div>
-
-          {% if form.errors %}
-          <div class="rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3">
-            Invalid username or password. Please try again.
-          </div>
-          {% endif %}
-
-          <form method="POST" action="{% url 'login' %}" class="space-y-6">
-            {% csrf_token %}
-
-            <div class="space-y-4">
-              <label class="flex flex-col">
-                <p class="text-gray-900 dark:text-gray-200 text-sm font-medium pb-2">
-                  Email or Username
-                </p>
-                <input
-                  type="text"
-                  name="username"
-                  required
-                  placeholder="Enter your email or username"
-                  class="form-input flex w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-background-dark h-12 px-4 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary focus:ring-primary"
+  <body class="font-display bg-background-light text-gray-900">
+    <div
+      class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark"
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- HEADER -->
+        <header
+          class="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 px-6 sm:px-10 md:px-20 py-3"
+        >
+          <a
+            href="{% url 'home' %}"
+            class="flex items-center gap-4 text-gray-900 dark:text-white"
+          >
+            <div class="size-6 text-primary">
+              <svg fill="none" viewBox="0 0 48 48">
+                <path
+                  d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                  fill="currentColor"
                 />
-              </label>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold">
+              VulneraBlog — Write. React. Connect.
+            </h2>
+          </a>
+        </header>
 
-              <label class="flex flex-col">
-                <p class="text-gray-900 dark:text-gray-200 text-sm font-medium pb-2">
-                  Password
-                </p>
-                <div class="flex w-full items-stretch">
+        <!-- MAIN -->
+        <main class="flex flex-1 items-center justify-center px-4 py-10">
+          <div class="w-full max-w-md space-y-8">
+            <!-- LOGIN CARD -->
+            <div
+              class="login-card rounded-xl shadow-lg p-8 space-y-6 border border-gray-200"
+            >
+              <h1 class="text-3xl font-bold text-center">
+                Log In to VulneraBlog
+              </h1>
+
+              {% if form.errors %}
+              <div
+                class="rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3"
+              >
+                Invalid username or password. Please try again.
+              </div>
+              {% endif %}
+
+              <form method="POST" action="{% url 'login' %}" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- USERNAME -->
+                <div>
+                  <p class="login-label text-sm pb-2">Email or Username</p>
                   <input
-                    type="password"
-                    name="password"
+                    type="text"
+                    name="username"
                     required
-                    placeholder="Enter your password"
-                    class="form-input flex w-full min-w-0 flex-1 rounded-l-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-background-dark h-12 px-4 pr-2 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary focus:ring-primary"
+                    placeholder="Enter your email or username"
+                    class="login-input w-full h-12 rounded-lg px-4"
                   />
-                  <div class="flex items-center justify-center rounded-r-lg border border-l-0 border-gray-300 dark:border-gray-700 bg-white dark:bg-background-dark pr-4">
-                    <span class="material-symbols-outlined text-gray-500 dark:text-gray-400">
-                      visibility
-                    </span>
+                </div>
+
+                <!-- PASSWORD -->
+                <div>
+                  <p class="login-label text-sm pb-2">Password</p>
+                  <div class="flex">
+                    <input
+                      type="password"
+                      name="password"
+                      required
+                      placeholder="Enter your password"
+                      class="login-input w-full h-12 rounded-l-lg px-4"
+                    />
+                    <div
+                      class="flex items-center justify-center px-4 rounded-r-lg border border-l-0 border-gray-300 bg-white"
+                    >
+                      <span class="material-symbols-outlined">
+                        visibility
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </label>
+
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" class="login-btn w-full h-12 rounded-lg">
+                  Log In
+                </button>
+
+                <!-- FORGOT PASSWORD -->
+                <div class="text-center">
+                  <a
+                    href="{% url 'forgot_password' %}"
+                    class="login-link text-sm"
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+              </form>
             </div>
 
-            <button
-              type="submit"
-              class="flex w-full items-center justify-center rounded-lg h-12 px-5 bg-primary text-white text-sm font-bold tracking-wide hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark">
-              Log In
-            </button>
-
-            <div class="text-center">
-              <a href="#" class="text-sm font-medium text-primary hover:underline">
-                Forgot Password?
+            <!-- SIGNUP -->
+            <div class="text-center text-sm">
+              <span class="text-gray-600">Don't have an account?</span>
+              <a href="{% url 'signup' %}" class="login-link font-bold ml-1">
+                Create New Account
               </a>
             </div>
-          </form>
-        </div>
-
-        <div class="flex items-center justify-center gap-2 text-center">
-          <p class="text-sm text-gray-600 dark:text-gray-400">
-            Don't have an account?
-          </p>
-          <a href="{% url 'signup' %}" class="text-sm font-bold text-primary hover:underline">
-            Create New Account
-          </a>
-        </div>
-
+          </div>
+        </main>
       </div>
-    </main>
-  </div>
-</div>
-</body>
+    </div>
+  </body>
 </html>
