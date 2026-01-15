@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reset Password</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  </head>
+
+  <body class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 space-y-6">
+      <h2 class="text-lg font-semibold text-center text-gray-900">
+        {{ question }}
+      </h2>
+
+      <form method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- REQUIRED FOR OPTION 2 -->
+        <input type="hidden" name="username" value="{{ username }}" />
+
+        <input
+          type="text"
+          name="answer"
+          required
+          placeholder="Your answer"
+          class="form-input w-full h-11 rounded-lg border-gray-300 px-4"
+        />
+
+        <input
+          type="password"
+          name="password"
+          required
+          placeholder="New password"
+          class="form-input w-full h-11 rounded-lg border-gray-300 px-4"
+        />
+
+        <button
+          class="w-full h-11 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
+        >
+          Reset Password
+        </button>
+
+        {% for message in messages %}
+        <p class="text-sm text-red-600 text-center">{{ message }}</p>
+        {% endfor %}
+      </form>
+
+      <div class="text-center">
+        <a
+          href="{% url 'login' %}"
+          class="text-sm text-blue-600 hover:underline"
+        >
+          Back to Login
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

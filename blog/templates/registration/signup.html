@@ -16,6 +16,19 @@
     <link rel="stylesheet" href="{% static 'blog/css/signup.css' %}">
 </head>
 
+<script>
+    function togglePassword(fieldId, btn) { // ADDED
+        const input = document.getElementById(fieldId); // ADDED
+        if (input.type === "password") { // ADDED
+            input.type = "text"; // ADDED
+            btn.textContent = "🙈"; // ADDED
+        } else {
+            input.type = "password"; // ADDED
+            btn.textContent = "👁️"; // ADDED
+        }
+    }
+</script>
+
 <body class="font-display bg-gray-100 min-h-screen flex items-center justify-center">
 
 <div class="w-full max-w-md space-y-6 bg-white shadow-lg rounded-xl p-8">
@@ -35,21 +48,69 @@
             {% endif %}
         </div>
 
-        <div>
+        <div class="space-y-1">
             <label class="block text-sm font-medium mb-1">Password</label>
-            <input type="password" name="password1" required class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm" placeholder="Create a password" />
+            <div class="relative">
+            <input type="password" name="password1"  id="password1" required class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm" placeholder="Create a password" />
+
+            <button 
+            type="button" 
+            onclick="togglePassword('password1', this)" 
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
+        > 
+            👁️ 
+        </button> 
+    </div>
             {% if form.password1.errors %}
                 <p class="text-sm text-red-600 mt-1">{{ form.password1.errors|striptags }}</p>
             {% endif %}
         </div>
 
-        <div>
+        <div class="space-y-1">
             <label class="block text-sm font-medium mb-1">Confirm Password</label>
-            <input type="password" name="password2" required class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm" placeholder="Confirm your password" />
+            <div class="relative">
+            <input type="password" name="password2" id="password2" required class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm" placeholder="Confirm your password" />
+
+            <button 
+            type="button" 
+            onclick="togglePassword('password2', this)" 
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"
+        >
+            👁️ 
+        </button> 
+    </div>
             {% if form.password2.errors %}
                 <p class="text-sm text-red-600 mt-1">{{ form.password2.errors|striptags }}</p>
             {% endif %}
         </div>
+
+<!-- security question field-->
+    <div class="space-y-1"> 
+    <label class="block text-sm font-medium">Security Question</label> <!-- ADDED -->
+
+    <select 
+        name="security_question" 
+        required
+        class="form-select w-full rounded-lg border-gray-300 h-11 px-3 text-sm"
+    > 
+        <option value="">Select a question</option> 
+        <option value="pet">What is your first pet's name?</option> <!-- ADDED -->
+        <option value="mother">What is your mother's maiden name?</option> <!-- ADDED -->
+        <option value="ex">What is the name of the person your ex is currently dating?</option> <!-- ADDED -->
+    </select>
+</div>
+
+<div class="space-y-1"> <!-- ADDED -->
+    <label class="block text-sm font-medium">Your Answer</label> <!-- ADDED -->
+
+    <input
+        type="text"
+        name="security_answer"
+        required
+        class="form-input w-full rounded-lg border-gray-300 h-11 px-3 text-sm"
+        placeholder="Answer (case-sensitive)"
+    /> <!-- ADDED -->
+</div>
 
         <button type="submit" class="w-full h-11 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition">
             Sign Up
