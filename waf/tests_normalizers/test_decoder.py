@@ -39,7 +39,6 @@ def test_base64_layer_decoded():
 
 
 def test_url_then_base64_stacked():
-    # base64 of a script tag, then that base64 string URL-encoded
     inner = base64.b64encode(b"<script>alert(1)</script>").decode()
     from urllib.parse import quote
     outer = quote(inner)
@@ -49,8 +48,6 @@ def test_url_then_base64_stacked():
 
 
 def test_zero_width_and_url_encoding_combined():
-    # 'SEL%E2%80%8BECT' style would be multi-byte; simpler: zero-width
-    # char embedded directly, no URL encoding needed for this layer
     result = decode_fully("SEL\u200bECT")
     assert result.value == "SELECT"
     assert result.had_zero_width_chars

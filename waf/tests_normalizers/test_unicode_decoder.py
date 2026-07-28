@@ -32,14 +32,12 @@ def test_js_unicode_escape_with_braces():
 
 
 def test_nfkc_normalizes_fullwidth_chars():
-    # Fullwidth "SELECT" (U+FF33 etc.)
     fullwidth = "\uff33\uff25\uff2c\uff25\uff23\uff34"
     result = normalize(fullwidth)
     assert result.value == "SELECT"
 
 
 def test_mixed_script_detected():
-    # Cyrillic 'а' (U+0430) mixed with Latin letters
     payload = "p\u0430ssword"
     result = normalize(payload)
     assert result.had_mixed_script
@@ -59,7 +57,6 @@ def test_no_false_positive_on_clean_input():
 
 
 def test_combined_tricks():
-    # zero-width char + JS escape in the same payload
     payload = "\\u0053EL\u200bECT"
     result = normalize(payload)
     assert result.value == "SELECT"

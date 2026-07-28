@@ -14,10 +14,6 @@ from waf.normalizers.request_normalizer import normalize_request, normalize_valu
 
 
 class FakeRequest:
-    """Minimal stand-in for django.http.HttpRequest -- just needs the
-    same attribute shapes (.GET/.POST/.COOKIES/.headers as dict-likes,
-    plus .path and .method)."""
-
     def __init__(self, path="/", method="GET", GET=None, POST=None, COOKIES=None, headers=None):
         self.path = path
         self.method = method

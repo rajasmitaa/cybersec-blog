@@ -30,7 +30,6 @@ def test_xss_payload_in_base64_detected():
 
 
 def test_rejects_short_strings():
-    # too short to bother decoding even though technically valid base64
     result = decode_if_base64("abcd")
     assert not result.is_base64
 
@@ -41,10 +40,8 @@ def test_rejects_non_base64_charset():
 
 
 def test_rejects_binary_garbage_output():
-    # valid base64 charset/length but decodes to non-printable bytes
     garbage = base64.b64encode(bytes(range(200, 220))).decode()
     result = decode_if_base64(garbage)
-    # is_base64 may be True (decodes fine) but printable should be False
     assert not result.printable
 
 
@@ -63,7 +60,7 @@ def test_find_base64_substrings_ignores_short_noise():
 
 
 def test_urlsafe_base64_variant():
-    payload = b"data with / and + chars \xff\xfe" if False else b"simple text payload here"
+    payload = b"simple text payload here"
     encoded = base64.urlsafe_b64encode(payload).decode()
     result = decode_if_base64(encoded)
     assert result.is_base64

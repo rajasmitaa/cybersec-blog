@@ -26,14 +26,12 @@ def test_no_encoding_present():
 
 
 def test_double_encoding_unwound():
-    # %2527 -> %27 -> '
     result = decode("%2527")
     assert result.value == "'"
     assert result.multiply_encoded
 
 
 def test_sql_injection_double_encoded_bypass():
-    # ' OR 1=1 double encoded
     payload = "%2527%2520OR%25201%253D1"
     result = decode(payload)
     assert "OR" in result.value
@@ -41,15 +39,13 @@ def test_sql_injection_double_encoded_bypass():
 
 
 def test_max_passes_is_respected():
-    # Something that would keep "changing" is unrealistic for real
-    # percent-encoding since it converges, but max_passes caps iteration count
     result = decode("%2525252525", max_passes=2)
     assert result.passes_applied <= 2
 
 
 def test_plus_as_space_false_by_default():
     result = decode("a+b")
-    assert result.value == "a+b"  # '+' untouched without plus_as_space
+    assert result.value == "a+b"
 
 
 def test_plus_as_space_true_for_form_data():
@@ -68,6 +64,5 @@ def test_looks_percent_encoded():
 
 
 def test_single_pass_no_infinite_loop_on_literal_percent():
-    # A literal '%' not part of valid encoding shouldn't cause issues
     result = decode("100% sure")
     assert result.value == "100% sure"
